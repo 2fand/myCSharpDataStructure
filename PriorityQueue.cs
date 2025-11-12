@@ -8,14 +8,16 @@ public class PriorityQueue<T>
     Func<T, T, bool> compareFunc;//比较用函数，使类更通用
     int count = 0;//堆的元素数量，初始为0，**不可在外界更改**
     public int Count => count;
-    public PriorityQueue(Func<T, T, bool> func) 
+    public PriorityQueue(Func<T, T, bool> func, int heapArrayCapacity = 8)
     {
         compareFunc = func;//设置排序方式
+        heapArray = new(heapArrayCapacity);//设置初始堆的容量
         heapArray.Add(default);//初始堆
     }
-    public PriorityQueue(Func<T, T, bool> func, T[] array)
+    public PriorityQueue(Func<T, T, bool> func, T[] array, int heapArrayCapacity = 8)
     {
         compareFunc = func;//设置排序方式
+        heapArray = new(Math.Max(array.Length, heapArrayCapacity));//如果要拷贝的数长度大于预留堆的容量，那么最好设置数组的容量，否则设置的是预留堆的容量
         heapArray.Add(default);
         for (int i = 0; i < array.Length; i++) {
             Enqueue(array[i]);

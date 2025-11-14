@@ -72,7 +72,11 @@ public class PriorityQueue<T>
                 }
             }
         }
-        if (1 != i && compareFunc(heapArray[i], heapArray[i / 2]))//看是否上比下后，是上
+        if (0 == i)//键值对虽有，堆不存在物品
+        {
+            return;
+        }
+        else if (1 != i && compareFunc(heapArray[i], heapArray[i / 2]))//看是否上比下后，是上
         {//根据情况更新节点
             NodeUp(i);
         }
@@ -99,6 +103,10 @@ public class PriorityQueue<T>
                     break;//已获得索引
                 }
             }
+        }
+        if (0 == i)//键值对虽有，堆不存在物品
+        {
+            return;
         }
         heapArray[i] = changeItem;
         itemToIndexDic[item][i] = false;//停用原索引

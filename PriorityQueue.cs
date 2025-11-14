@@ -150,6 +150,7 @@ public class PriorityQueue<T>
             //i与i/2索引交换后对应元素停用v
             UpdateDic(heapArray[i], i / 2);
             UpdateDic(heapArray[i / 2], i);
+            //-----
             (heapArray[i], heapArray[i / 2]) = (heapArray[i / 2], heapArray[i]);//交换元素优先级
             i /= 2;//继续在前往根结点处的路径上检测
         }
@@ -162,13 +163,15 @@ public class PriorityQueue<T>
         {
             if (2 * i + 1 <= count)
             {
-                (heapArray[i], heapArray[i * 2 + (compareFunc(heapArray[i * 2], heapArray[i * 2 + 1]) ? 0 : 1)]) = (heapArray[i * 2 + (compareFunc(heapArray[i * 2], heapArray[i * 2 + 1]) ? (extraAddValue = 0) : (extraAddValue = 1))], heapArray[i]);//比较以获取应交换元素
+                
                 //i与i*2+extraAddValue索引对应元素停用v
                 itemToIndexDic[heapArray[i]][i] = false;
                 itemToIndexDic[heapArray[i * 2 + extraAddValue]][i * 2 + extraAddValue] = false;
                 //i与i*2+extraAddValue索引交换后对应元素使用v
                 UpdateDic(heapArray[i], i * 2 + extraAddValue);
                 UpdateDic(heapArray[i * 2 + extraAddValue], i);
+                //-----
+                (heapArray[i], heapArray[i * 2 + (compareFunc(heapArray[i * 2], heapArray[i * 2 + 1]) ? 0 : 1)]) = (heapArray[i * 2 + (compareFunc(heapArray[i * 2], heapArray[i * 2 + 1]) ? (extraAddValue = 0) : (extraAddValue = 1))], heapArray[i]);//比较以获取应交换元素
                 i = i * 2 + extraAddValue;//根据交换元素来将i往其移动
             }
             else//无右节点时
@@ -179,6 +182,7 @@ public class PriorityQueue<T>
                 //i与i*2索引交换后对应元素使用v
                 UpdateDic(heapArray[i], i * 2);
                 UpdateDic(heapArray[i * 2], i);
+                //-----
                 (heapArray[i], heapArray[i * 2]) = (heapArray[i * 2], heapArray[i]);//交换左节点
                 i *= 2;//根据交换元素来将i往其移动
             }
